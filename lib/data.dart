@@ -1,3 +1,3 @@
-import 'package:todo/model.dart/Group.dart';
+import 'models/group.dart';
 
-List<Group> groups = [];
+List<Group> groupss = [];

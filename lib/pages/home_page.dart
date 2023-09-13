@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo/data.dart';
-import 'package:todo/hive.dart';
-import 'package:todo/model.dart/Group.dart';
+import 'package:todo/main.dart';
+import 'package:todo/models/group.dart';
 import 'package:todo/utils/container_view.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -32,8 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           _showBottomSheet(context);
         },
-        backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white,
         tooltip: 'Increment',
         child: const Icon(
           Icons.add,
@@ -71,22 +68,23 @@ class _MyHomePageState extends State<MyHomePage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
+
+                  FilledButton(
                       onPressed: () {
+                        groups.add(Group(title: textController2.text));
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)))),
+                      style: FilledButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(16),
+                          ),
+                        ),
+                      ),
                       child: const Padding(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 115),
-                        child: Text(
-                          "Create group",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
+                        child: Text("Create group"),
                       )),
                   const SizedBox(
                     height: 20,

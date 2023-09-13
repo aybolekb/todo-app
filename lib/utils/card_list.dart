@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo/model.dart/Group.dart';
-import 'package:todo/pages/GroupPage.dart';
+import 'package:todo/pages/task_page.dart';
+
+import '../models/group.dart';
 
 class CardList extends StatelessWidget {
   final Group group;
@@ -19,7 +20,7 @@ class CardList extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => GroupPage(group: group)));
+            MaterialPageRoute(builder: (context) => TaskPage(group: group)));
       },
       child: Container(
         height: 150,

@@ -1,38 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo/data.dart';
-import 'package:todo/model.dart/Group.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:todo/utils/card_list.dart';
 
-class ContainerView extends StatelessWidget {
-  ContainerView({super.key});
+import '../main.dart';
 
-  final List<Map<String, dynamic>> itemList = [
-    {
-      "name": "Work",
-      "description": "16 task 4 completed",
-      "value": 0.6,
-    },
-    {
-      "name": "Study",
-      "description": "10 chapters 7 completed",
-      "value": 0.7,
-    },
-    {
-      "name": "Exercise",
-      "description": "3 miles run",
-      "value": 0.3,
-    },
-    {
-      "name": "Hobby",
-      "description": "Painting",
-      "value": 0.4,
-    },
-    {
-      "name": "Chores",
-      "description": "House cleaning",
-      "value": 0.2,
-    },
-  ];
+class ContainerView extends StatelessWidget {
+  const ContainerView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +22,8 @@ class ContainerView extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            child: const Row(
-              children: [
+            child: Row(
+              children: const [
                 Icon(
                   Icons.search,
                   size: 28,
@@ -70,24 +43,32 @@ class ContainerView extends StatelessWidget {
             height: 20,
           ),
           Expanded(
-              child: GridView.builder(
-            itemCount: groups.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 25.0,
-              childAspectRatio: 1.5,
-              crossAxisSpacing: 18.0,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              final item = groups[index];
-              return CardList(
-                name: item.title,
-                description: "kndw",
-                value: 30,
-                group: groups[index],
-              );
-            },
-          )),
+              child: ValueListenableBuilder(
+                  valueListenable: groups.listenable(),
+                  builder: (context, value, child) {
+                    if (value.length == 0) {
+                      return const Icon(Icons.add_box_rounded, size: 40);
+                    }
+                    return GridView.builder(
+                      itemCount: groups.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 25.0,
+                        childAspectRatio: 1.5,
+                        crossAxisSpacing: 18.0,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        final item = value.getAt(index);
+                        return CardList(
+                          name: item.title,
+                          description: "kndw",
+                          value: 30,
+                          group: item,
+                        );
+                      },
+                    );
+                  })),
         ],
       ),
     );

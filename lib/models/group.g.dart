@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Group.dart';
+part of 'group.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -18,18 +18,15 @@ class GroupAdapter extends TypeAdapter<Group> {
     };
     return Group(
       title: fields[0] as String,
-      tasks: (fields[1] as List).cast<Task>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Group obj) {
     writer
-      ..writeByte(2)
-      ..writeByte(0)
-      ..write(obj.title)
       ..writeByte(1)
-      ..write(obj.tasks);
+      ..writeByte(0)
+      ..write(obj.title);
   }
 
   @override
